@@ -1,0 +1,43 @@
+module Shift_Unit_Test;
+
+// entradas
+reg [7:0] dataa;
+reg [1:0] shamt;
+
+// salida
+wire [7:0] dataout;
+
+
+Shift_Unit uut (
+    .dataa(dataa),
+    .shamt(shamt),
+    .dataout(dataout)
+);
+
+
+reg clk;
+always #5 clk = ~clk;
+
+
+initial begin
+    dataa = 8'b10101010; // numero de ejemplo
+    shamt = 2'b00; // no desplaza inicialmente
+
+	 
+    #10;
+    $display("Data: %b, Shift amount: %b, Data Out: %b", dataa, shamt, dataout);
+
+    // desplazamiento a la derecha
+    shamt = 2'b01;
+    #10;
+    $display("Data: %b, Shift amount: %b, Data Out: %b", dataa, shamt, dataout);
+
+    // desplazamiento a la izquierda
+    shamt = 2'b10;
+    #10;
+    $display("Data: %b, Shift amount: %b, Data Out: %b", dataa, shamt, dataout);
+
+
+end
+
+endmodule
